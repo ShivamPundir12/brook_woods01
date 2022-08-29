@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "191090979887",
+    "project_id": "broowoods",
+    "storage_bucket": "broowoods.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191090979887:android:aa048d2c453f11afe3c2da",
+        "android_client_info": {
+          "package_name": "com.example.brook_woods01"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "191090979887-ruk5tcl665c0o4g0o834ktqf623ts5u4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC55r6aEITkJ2bhE_xauHr_6iVvgUeG16E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "191090979887-ruk5tcl665c0o4g0o834ktqf623ts5u4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
