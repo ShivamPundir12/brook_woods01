@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sizer/sizer.dart';
 
 class MyLogin extends StatefulWidget {
@@ -185,6 +184,14 @@ class _MyLoginState extends State<MyLogin> {
                               ),
                               onPressed: () async {
                                 try {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return Center(
+                                          child: CircularProgressIndicator(),
+                                        );
+                                      });
+
                                   UserCredential userCredential =
                                       await FirebaseAuth
                                           .instance
@@ -216,7 +223,7 @@ class _MyLoginState extends State<MyLogin> {
                                     duration: Duration(seconds: 3),
                                     behavior: SnackBarBehavior.floating,
                                   ));
-
+                                  Navigator.of(context).pop();
                                   // Fluttertoast.showToast(
                                   //     msg: e.toString(),
                                   //     gravity: ToastGravity.BOTTOM);

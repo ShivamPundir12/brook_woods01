@@ -36,7 +36,7 @@ Future main() async {
     child: MaterialApp(
       title: 'BrookWoods',
       debugShowCheckedModeBanner: false,
-      initialRoute: '/register',
+      initialRoute: '/Animated',
       routes: {
         '/reset': (context) => ForgotPassword(),
         '/Animated': (context) => AnimatedPage(),
@@ -51,10 +51,13 @@ Future main() async {
             if (snapshot.data == false) {
               return MyLogin();
             }
-            if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
               return Container(
                   color: Colors.white,
-                  child: Center(child: CircularProgressIndicator()));
+                  child: Center(
+                      child: CircularProgressIndicator(
+                    color: Colors.blueAccent,
+                  )));
             }
             return NavPage();
           }),

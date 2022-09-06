@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:sizer/sizer.dart';
 
@@ -249,6 +248,13 @@ class _MyRegisterState extends State<MyRegister> {
                             onPressed: () async {
                               try {
                                 if (passwordConfirmed()) {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return Center(
+                                          child: CircularProgressIndicator(),
+                                        );
+                                      });
                                   await FirebaseAuth.instance
                                       .createUserWithEmailAndPassword(
                                           email: emailController.text.trim(),
@@ -271,6 +277,7 @@ class _MyRegisterState extends State<MyRegister> {
                                   duration: Duration(seconds: 1),
                                   behavior: SnackBarBehavior.floating,
                                 ));
+                                Navigator.of(context).pop();
                               }
                             },
                             child: Text(
