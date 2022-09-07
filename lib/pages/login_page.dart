@@ -1,4 +1,5 @@
 import 'package:brook_woods01/pages/Navbar/nav_bar.dart';
+import 'package:brook_woods01/services/secure_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,7 @@ class _MyLoginState extends State<MyLogin> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmpassController = TextEditingController();
+  final SecureStorage secureStorage = SecureStorage();
 
   @override
   void dispose() {
@@ -200,9 +202,16 @@ class _MyLoginState extends State<MyLogin> {
                                                   emailController.text.trim(),
                                               password: passwordController.text
                                                   .trim());
-                                  await storage.write(
-                                      key: "email",
-                                      value: userCredential.user?.uid);
+                                  await secureStorage.writeSecureData('email',
+                                      userCredential.user!.email.toString());
+                                  secureStorage.writeSecureData(
+                                      'name',
+                                      userCredential.user!.displayName
+                                          .toString());
+                                  // storage.write(
+                                  //     key: "email",
+                                  //     value: userCredential.user?.uid);
+
                                   Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(

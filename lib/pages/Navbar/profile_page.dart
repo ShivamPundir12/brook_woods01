@@ -1,9 +1,9 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:brook_woods01/services/secure_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../login_page.dart';
 
 class Profile extends StatefulWidget {
@@ -14,11 +14,12 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  SecureStorage secureStorage = SecureStorage();
   bool showPassword = true;
 
   final user = FirebaseAuth.instance.currentUser!;
 
-  final storage = FlutterSecureStorage();
+  // final storage = FlutterSecureStorage();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,15 +28,15 @@ class _ProfileState extends State<Profile> {
         actions: [
           IconButton(
             onPressed: () async => {
-              await Duration(seconds: 5),
-              await FirebaseAuth.instance.signOut(),
-              await storage.delete(key: "uid"),
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MyLogin(),
-                  ),
-                  (route) => false),
+              await FirebaseAuth.instance.signOut().whenComplete(
+                  () => secureStorage.deleteSecureData('email').whenComplete(
+                        () => Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MyLogin(),
+                            ),
+                            (route) => false),
+                      ))
             },
             tooltip: "Logout",
             icon: Icon(
@@ -102,7 +103,7 @@ class _ProfileState extends State<Profile> {
               SizedBox(
                 height: 55,
               ),
-              buildTextField("Full Name", "Your name", false),
+              buildTextField("Name", user.displayName.toString(), false),
               buildTextField("E-mail", user.email!, false),
               buildTextField("Password", "********", true),
               buildTextField("UID", user.uid, false),
