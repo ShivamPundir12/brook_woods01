@@ -16,6 +16,7 @@ class CartItem {
 
 class Cart with ChangeNotifier {
   Map<String, CartItem> _items = {};
+  int qty = 0;
 
   Map<String, CartItem> get items {
     return {..._items};
@@ -44,20 +45,13 @@ class Cart with ChangeNotifier {
     }
   }
 
-  String get totalPrice {
-    String sum = "";
+  double get totalToPay {
+    double total = 0;
     _items.forEach((key, value) {
-      sum += ((value.price.toString()) * value.qty);
+      total += double.parse(value.price) * value.qty;
     });
-    return sum;
+    return total;
   }
-  // String get totalToPay {
-  //   String total = '';
-  //   _items.forEach((key, value) {
-  //     total += (value.price.toString()) * value.qty;
-  //   });
-  //   return total;
-  // }
 
   void removeItem(String productId) {
     _items.remove(productId);

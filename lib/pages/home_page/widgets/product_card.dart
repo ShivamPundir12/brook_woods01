@@ -98,7 +98,7 @@ class ItemCard extends StatelessWidget {
                                               topRight: Radius.circular(5),
                                               bottomLeft: Radius.circular(5))),
                                       child: Text(
-                                        model.price.toString(),
+                                        "₹${model.price}",
                                         style: itemCardPrice,
                                       ),
                                     ),

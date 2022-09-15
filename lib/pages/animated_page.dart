@@ -1,39 +1,11 @@
-// ignore_for_file: unnecessary_null_comparison
-
 import 'dart:async';
-
-// import 'package:animated_splash_screen/animated_splash_screen.dart';
-// import 'package:brook_woods01/services/secure_storage.dart';
 import 'package:brook_woods01/pages/Navbar/nav_bar.dart';
 import 'package:brook_woods01/services/secure_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 import 'login_page.dart';
 
-// class AnimatedPage extends StatefulWidget {
-//   const AnimatedPage({Key? key}) : super(key: key);
-
-//   @override
-//   State<AnimatedPage> createState() => _AnimatedPageState();
-// }
-
-// class _AnimatedPageState extends State<AnimatedPage> {
-//   final SecureStorage secureStorage = SecureStorage();
-//   @override
-//   Widget build(BuildContext context) {
-//     return AnimatedSplashScreen(
-//       splash: Image.asset('assets/furnitures.png'),
-//       disableNavigation: false,
-//       nextScreen: MyLogin(),
-//       splashIconSize: 150,
-//       backgroundColor: Colors.indigo.shade700,
-//       splashTransition: SplashTransition.slideTransition,
-//       animationDuration: Duration(seconds: 2),
-//       curve: Curves.bounceOut,
-//       duration: 1500,
-//     );
-//   }
-// }
 String? finalEmail, finalName;
 
 class SplashScreen extends StatefulWidget {
@@ -66,35 +38,55 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.indigo.shade700,
-      body: Container(
+        backgroundColor: Colors.indigo.shade700,
+        body: Container(
           child: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 30),
-              child: SizedBox(
-                height: 130.0,
-                child: Image.asset(
-                  'assets/furnitures.png',
-                ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 80),
+              child: SingleChildScrollView(
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          top: 110,
+                        ),
+                        child: SizedBox(
+                          height: 130.0,
+                          child: Image.asset(
+                            'assets/furnitures.png',
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                        child: SizedBox(
+                          height: 140,
+                          width: 200,
+                          child: LinearPercentIndicator(
+                            barRadius: Radius.circular(20),
+                            percent: 100 / 100,
+                            animation: true,
+                            animationDuration: 1450,
+                            center: Text(
+                              'Loading...',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  letterSpacing: 2,
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: 'Lobster',
+                                  color: Colors.white60),
+                            ),
+                            lineHeight: 20,
+                            width: 200.0,
+                            progressColor: Colors.blueAccent.shade200,
+                          ),
+                        ),
+                      )
+                    ]),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 80),
-              child: SizedBox(
-                height: 40,
-                width: 40,
-                child: CircularProgressIndicator(
-                  backgroundColor: Colors.white,
-                ),
-              ),
-            )
-          ],
-        ),
-      )),
-    );
+          ),
+        ));
   }
 }

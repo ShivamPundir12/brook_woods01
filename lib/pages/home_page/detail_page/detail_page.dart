@@ -124,28 +124,17 @@ class _DetailsPageState extends State<DetailsPage> {
                               MaterialButton(
                                 minWidth: 10,
                                 onPressed: () {
-                                  cart.addItem(
-                                    image: widget.model.image.toList(),
-                                    name: widget.model.name.toString(),
-                                    price: widget.model.price.toString(),
-                                  );
-                                  setState(() {
-                                    qty++;
-                                  });
-                                  // ScaffoldMessenger.of(context).showSnackBar(
-                                  //     SnackBar(
-                                  //         shape: RoundedRectangleBorder(
-                                  //             borderRadius:
-                                  //                 BorderRadius.circular(20)),
-                                  //         backgroundColor:
-                                  //             Colors.indigoAccent.shade200,
-                                  //         duration: Duration(seconds: 1),
-                                  //         behavior: SnackBarBehavior.floating,
-                                  //         content: Text(
-                                  //           "Product is added to Cart",
-                                  //           style: TextStyle(
-                                  //               fontWeight: FontWeight.w200),
-                                  //         )));
+                                  if (qty <= 19)
+                                    setState(() {
+                                      if (cart.qty <= 19) {
+                                        cart.addItem(
+                                          image: widget.model.image.toList(),
+                                          name: widget.model.name.toString(),
+                                          price: widget.model.price.toString(),
+                                        );
+                                      }
+                                      qty++;
+                                    });
                                 },
                                 child: Text(
                                   '+',
@@ -161,29 +150,17 @@ class _DetailsPageState extends State<DetailsPage> {
                               MaterialButton(
                                 minWidth: 10,
                                 onPressed: () {
-                                  cart.remove(
-                                    image: widget.model.image.toList(),
-                                    name: widget.model.name.toString(),
-                                    price: widget.model.price.toString(),
-                                  );
                                   if (qty > 1)
                                     setState(() {
+                                      if (cart.qty != 1) {
+                                        cart.remove(
+                                          image: widget.model.image.toList(),
+                                          name: widget.model.name.toString(),
+                                          price: widget.model.price.toString(),
+                                        );
+                                      }
                                       qty--;
                                     });
-                                  // ScaffoldMessenger.of(context).showSnackBar(
-                                  //     SnackBar(
-                                  //         shape: RoundedRectangleBorder(
-                                  //             borderRadius:
-                                  //                 BorderRadius.circular(20)),
-                                  //         backgroundColor:
-                                  //             Colors.indigoAccent.shade200,
-                                  //         duration: Duration(seconds: 1),
-                                  //         behavior: SnackBarBehavior.floating,
-                                  //         content: Text(
-                                  //           "Product is removed from Cart",
-                                  //           style: TextStyle(
-                                  //               fontWeight: FontWeight.w200),
-                                  //         )));
                                 },
                                 child: Text(
                                   '-',
@@ -214,7 +191,7 @@ class _DetailsPageState extends State<DetailsPage> {
                             style: subHeading,
                           ),
                           TextSpan(
-                            text: widget.model.price.toString(),
+                            text: "₹${widget.model.price.toString()}",
                             style: itemCardHeading,
                           ),
                         ]),

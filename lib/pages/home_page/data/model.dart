@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Model with ChangeNotifier {
   final String name;
-  final String price;
+  final double price;
   final String description;
   final List image;
 

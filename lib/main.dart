@@ -23,6 +23,7 @@ Future main() async {
     child: MaterialApp(
         title: 'BrookWoods',
         debugShowCheckedModeBanner: false,
+        initialRoute: "Animated",
         routes: {
           '/reset': (context) => ForgotPassword(),
           '/Animated': (context) => SplashScreen(),
