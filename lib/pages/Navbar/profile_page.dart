@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:brook_woods01/services/google_signin.dart';
 import 'package:brook_woods01/services/secure_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -28,6 +29,9 @@ class _ProfileState extends State<Profile> {
         actions: [
           IconButton(
             onPressed: () async => {
+              await FirebaseServices().googleSignOut(),
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => MyLogin())),
               await FirebaseAuth.instance.signOut().whenComplete(
                   () => secureStorage.deleteSecureData('email').whenComplete(
                         () => Navigator.pushAndRemoveUntil(
@@ -76,7 +80,7 @@ class _ProfileState extends State<Profile> {
                           shape: BoxShape.circle,
                           image: DecorationImage(
                               fit: BoxFit.cover,
-                              image: AssetImage('assets/user img.png'))),
+                              image: NetworkImage(user.photoURL ?? ""))),
                     ),
                     Positioned(
                         bottom: 0,
@@ -126,13 +130,13 @@ class _ProfileState extends State<Profile> {
                             letterSpacing: 2.2,
                             color: Colors.black)),
                   ),
-                  RaisedButton(
+                  ElevatedButton(
+                    // style: ButtonStyle(foregroundColor: Colors.green,
+                    // padding: EdgeInsets.symmetric(horizontal: 50),
+                    // elevation: 2,
+                    // shape: RoundedRectangleBorder(
+                    //     borderRadius: BorderRadius.circular(20)),),
                     onPressed: () {},
-                    color: Colors.green,
-                    padding: EdgeInsets.symmetric(horizontal: 50),
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
                     child: Text(
                       "SAVE",
                       style: TextStyle(

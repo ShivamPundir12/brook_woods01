@@ -1,4 +1,5 @@
 import 'package:brook_woods01/pages/Navbar/nav_bar.dart';
+import 'package:brook_woods01/services/google_signin.dart';
 import 'package:brook_woods01/services/secure_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -176,8 +177,8 @@ class _MyLoginState extends State<MyLogin> {
                             padding: EdgeInsets.symmetric(horizontal: 100),
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                primary: Colors.grey.shade300,
-                                onPrimary: Colors.black,
+                                backgroundColor: Colors.grey.shade300,
+                                foregroundColor: Colors.black,
                                 shadowColor: Colors.grey.shade600,
                                 elevation: 3,
                                 shape: RoundedRectangleBorder(
@@ -247,6 +248,17 @@ class _MyLoginState extends State<MyLogin> {
                           ),
                         ),
                         SizedBox(height: 25),
+                        Divider(),
+                        TextButton(
+                            onPressed: () async {
+                              await FirebaseServices().signInWithGoogle();
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => NavPage()));
+                            },
+                            
+                            child: Text("Google Signin")),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

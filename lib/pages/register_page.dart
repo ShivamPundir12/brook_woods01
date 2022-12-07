@@ -237,8 +237,8 @@ class _MyRegisterState extends State<MyRegister> {
                           padding: EdgeInsets.symmetric(horizontal: 95),
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.brown.shade100,
-                              onPrimary: Colors.black87,
+                              foregroundColor: Colors.brown.shade100,
+                              backgroundColor: Colors.black87,
                               shadowColor: Colors.brown.shade600,
                               elevation: 3,
                               shape: RoundedRectangleBorder(

@@ -130,8 +130,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               Container(
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.grey.shade300,
-                      onPrimary: Colors.black,
+                      foregroundColor: Colors.grey.shade300,
+                      backgroundColor: Colors.black,
                       shadowColor: Colors.grey.shade600,
                       elevation: 3,
                       shape: RoundedRectangleBorder(
